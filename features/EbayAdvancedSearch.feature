@@ -31,3 +31,9 @@ Feature: Ebay Advanced Search
     When I advanced search an item
       | keyword   | exclude     | min | max  |
       | iphone 11 | refubrished | 300 | 9000 |
+      
+      
+      
+      
+      
+      

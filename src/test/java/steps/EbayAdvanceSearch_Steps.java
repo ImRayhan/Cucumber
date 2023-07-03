@@ -8,14 +8,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import actions.CommonAction;
+import actions.EbayAdvanced_Search;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class EbayAdvanceSearch_Steps {
-	public EbayAdvanceSearch_Steps(CommonSteps commonSteps) {
-		this.driver = commonSteps.getDriver();
+	CommonAction commonAction;
+	EbayAdvanced_Search ebayadvancedAction;
+
+	public EbayAdvanceSearch_Steps(CommonAction commonAction, EbayAdvanced_Search ebayAdvanedSearchAction) {
+		this.commonAction = commonAction;
+		this.ebayadvancedAction = ebayAdvanedSearchAction;
 
 	}
 
@@ -23,12 +29,14 @@ public class EbayAdvanceSearch_Steps {
 
 	@Given("I am on Ebay Advanced Search Page")
 	public void i_am_on_ebay_advanced_search_page() {
-		driver.get("https://www.ebay.com/sch/ebayadvsearch");
+		// driver.get("https://www.ebay.com/sch/ebayadvsearch");
+		commonAction.gotoUrl("https://www.ebay.com/sch/ebayadvsearch");
 	}
 
 	@When("I click on Ebay Logo")
 	public void i_click_on_ebay_logo() {
-		driver.findElement(By.xpath("//a[@id='gh-la']")).click();
+		// driver.findElement(By.xpath("//a[@xpid='gh-la']")).click();
+		ebayadvancedAction.clickOnLogo();
 	}
 
 	@Then("I am navigate to Ebay Home PAge")
@@ -43,14 +51,17 @@ public class EbayAdvanceSearch_Steps {
 
 	@Given("I am On Ebay  Home Page")
 	public void i_am_on_ebay_home_page() {
-		driver.get("https://www.ebay.com/");
+		// driver.get("https://www.ebay.com/");
+		commonAction.gotoUrl("https://www.ebay.com/");
 	}
 
 	@When("I search for {string}")
 	public void i_search_for_iphone(String str1) {
-		WebElement enter = driver.findElement(By.cssSelector("#gh-ac"));
-		enter.sendKeys(str1);
-		driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
+//		WebElement enter = driver.findElement(By.cssSelector("#gh-ac"));
+//		enter.sendKeys(str1);
+		ebayadvancedAction.searChing(str1);
+		// driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
+		ebayadvancedAction.clickSearch();
 	}
 
 	@Then("I validate atleast {int} search item present")
@@ -82,20 +93,28 @@ public class EbayAdvanceSearch_Steps {
 
 		}
 
-		driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
+		// driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
+		ebayadvancedAction.clickSearch();
 
 	}
 
 	@When("I advanced search an item")
 	public void i_advanced_search_an_item(DataTable dataTable) throws InterruptedException {
-		driver.findElement(By.xpath("//input[@id='_nkw']")).sendKeys(dataTable.cell(1, 0));
-		driver.findElement(By.xpath("//input[@id='_ex_kw']")).sendKeys(dataTable.cell(1, 1));
-		driver.findElement(By.id("s0-1-17-5[2]-@range-comp[]-@range-textbox[]-textbox")).sendKeys(dataTable.cell(1, 2));
-		driver.findElement(By.id("s0-1-17-5[2]-@range-comp[]-@range-textbox[]_1-textbox")).sendKeys(dataTable.cell(1, 3));
-		driver.findElement(
-				By.xpath("//div[@class='adv-form__actions']//button[@type='submit'][normalize-space()='Search']"))
-				.click();
-		Thread.sleep(3000);
+//		driver.findElement(By.xpath("//input[@id='_nkw']")).sendKeys(dataTable.cell(1, 0));
+//		driver.findElement(By.xpath("//input[@id='_ex_kw']")).sendKeys(dataTable.cell(1, 1));
+//		driver.findElement(By.id("s0-1-17-5[2]-@range-comp[]-@range-textbox[]-textbox")).sendKeys(dataTable.cell(1, 2));
+//		driver.findElement(By.id("s0-1-17-5[2]-@range-comp[]-@range-textbox[]_1-textbox"))
+//				.sendKeys(dataTable.cell(1, 3));
+//		driver.findElement(
+//				By.xpath("//div[@class='adv-form__actions']//button[@type='submit'][normalize-space()='Search']"))
+//				.click();
+//		Thread.sleep(3000);
+
+		ebayadvancedAction.enterItemNum(dataTable.cell(1, 0));
+		ebayadvancedAction.excludeWordSearch(dataTable.cell(1, 1));
+		ebayadvancedAction.minPrice(dataTable.cell(1, 2));
+		ebayadvancedAction.maxPrice(dataTable.cell(1, 3));
+		ebayadvancedAction.clickSearchad();
 
 	}
 

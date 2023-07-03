@@ -26,6 +26,18 @@ public class CommonSteps {
 
 	}
 
+	@Before("@beforespecificHooks")
+	public void beforespecificHooks() {
+		System.out.println("before scebario soecific");
+
+	}
+
+	@After("@afterspecificHooks")
+	public void afterspecificHooks() {
+		System.out.println("after scebario soecific");
+
+	}
+
 	public WebDriver getDriver() {
 		return driver;
 

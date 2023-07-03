@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="7.173" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="Ebay Advanced Search" name="Advanched search an item" time="7.057">
+<testsuite name="Cucumber" time="9.933" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="Ebay Advanced Search" name="Advanched search an item" time="9.871">
 <system-out><![CDATA[
 Given I am on Ebay Advanced Search Page.....................................passed
 When I advanced search an item..............................................passed
